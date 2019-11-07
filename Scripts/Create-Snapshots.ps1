@@ -23,14 +23,15 @@
 #---------------------------------------------------------[Initialisations]--------------------------------------------------------
 
 #Set Error Action to Silently Continue
-#$ErrorActionPreference = "SilentlyContinue"
+$ErrorActionPreference = "SilentlyContinue"
 
 #----------------------------------------------------------[Declarations]----------------------------------------------------------
 
 #Global Variables
 $scriptPath = 'd:\07_Git\PowerShellScripts\Scripts\'
 $scriptSources = Join-Path -Path $scriptPath -ChildPath sources
-$VMs = Get-Content (Join-Path -Path $scriptSources -ChildPath virtualMachines.txt)
+$stopVMs = Get-Content (Join-Path -Path $scriptSources -ChildPath stopVMs.txt)
+$startVMs = Get-Content (Join-Path -Path $scriptSources -ChildPath startVMs.txt)
 
 #Name of Snapshot
 $snapshotDate = Get-Date -Format 'yyyy-MM-dd'
@@ -41,7 +42,7 @@ $snapshotName = $snapshotDate + "_" + $snapshotTemp
 
 #-----------------------------------------------------------[Execution]------------------------------------------------------------
 
-foreach ($VM in $VMs) {
+foreach ($VM in $stopVMs) {
   Shutdown-VMGuest $VM -Confirm:$false
   $VMGuest = Get-VMGuest $VM
   $VMIP = $VMGuest.IPAddress | Select-String -Pattern 10.10.*
@@ -55,7 +56,7 @@ foreach ($VM in $VMs) {
   Write-Host "$VM stopped" -ForegroundColor Blue
 }
 
-foreach ($VM in $VMs) {
+foreach ($VM in $stopVMs) {
   $shutDownTest = Get-VM $VM
     
   if ($shutDownTest.PowerState -like '*PoweredOff*') {
@@ -68,7 +69,7 @@ foreach ($VM in $VMs) {
   }
 }
 
-foreach ($VM in $VMs) {
+foreach ($VM in $startVMs) {
   Start-VM $VM
   Write-Host "Starting $VM"
 }
