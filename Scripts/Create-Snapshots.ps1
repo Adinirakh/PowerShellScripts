@@ -1,9 +1,9 @@
 #requires -version 5
 <#
 .SYNOPSIS
-  Shutdown VMs from a source list, creates snapshots and start the VMs agein.
+  Shutdown VMs from a source list, creates snapshots and start the VMs again.
 .DESCRIPTION
-  <Brief description of script>
+  Edit startVMs.txt and stopVMs.txt befor you run the script. Open PowerShell and import module vmware.powercli.
 .PARAMETER <Parameter_Name>
     <Brief description of parameter input required. Repeat this attribute if required>
 .INPUTS
@@ -12,7 +12,7 @@
   <Outputs if any, otherwise state None - example: Log file stored in C:\Windows\Temp\<name>.log>
 .NOTES
   Version:        1.0
-  Author:         schaedlich.s@gmail.com
+  Author:         myztic@gmx.net
   Creation Date:  2019-11-07
   Purpose/Change: Initial script development
   
@@ -28,14 +28,14 @@ $ErrorActionPreference = "SilentlyContinue"
 #----------------------------------------------------------[Declarations]----------------------------------------------------------
 
 #Global Variables
-$scriptPath = 'd:\07_Git\PowerShellScripts\Scripts\'
+$scriptPath = 'Path\to\script\'
 $scriptSources = Join-Path -Path $scriptPath -ChildPath sources
 $stopVMs = Get-Content (Join-Path -Path $scriptSources -ChildPath stopVMs.txt)
 $startVMs = Get-Content (Join-Path -Path $scriptSources -ChildPath startVMs.txt)
 
 #Name of Snapshot
 $snapshotDate = Get-Date -Format 'yyyy-MM-dd'
-$snapshotTemp = 'ISD-Patchtag'
+$snapshotTemp = 'NameOfSnapshot'
 $snapshotName = $snapshotDate + "_" + $snapshotTemp
 
 #-----------------------------------------------------------[Functions]------------------------------------------------------------
@@ -79,6 +79,6 @@ foreach ($VM in $startVMs) {
 New-Item -Type File SnapshotReport.txt
 Out-File -FilePath SnapshotReport.txt -InputObject "Following snapshots were created:"
 Get-VM | Get-Snapshot | Where-Object Name -Like $snapshotName | Format-Table Name, Description, VM -AutoSize | Out-File -FilePath SnapshotReport.txt -NoClobber -Append
-Send-MailMessage -SmtpServer "outlook.jmrlp.de" -to "sven.schaedlich@jm.rlp.de" -from "PowerShell <helpdesk@jm.rlp.de>" -Subject "Results of Create-Snapshot" -body "Anbei der Snapshotreport für den Patchday" -Encoding UTF8 -Attachments .\SnapshotReport.txt
+Send-MailMessage -SmtpServer "smtp.yourserver.tld" -to "your@mail.address" -from "from@mail.address" -Subject "Results of Create-Snapshot" -body "Type in your Message" -Encoding UTF8 -Attachments .\SnapshotReport.txt
 Remove-Item .\SnapshotReport.txt -Confirm:$false
 

@@ -4,15 +4,15 @@
   
 .DESCRIPTION
   <Brief description of script>
-.PARAMETER TaskID
-    Needed for checking the task.
+.PARAMETER
+    TaskID - Needed for checking the task.
 .INPUTS
   <Inputs if any, otherwise state None>
 .OUTPUTS
   <Outputs if any, otherwise state None>
 .NOTES
   Version:        1.0
-  Author:         schaedlich.s@gmail.com
+  Author:         myztic@gmx.net
   Creation Date:  2019-11-08
   Purpose/Change: Initial script development
   
@@ -41,7 +41,7 @@ param (
 do {
     $a = Get-Task -Id $TaskID
     if ($a.PercentComplete -gt 99) {
-        Send-MailMessage -From sven.schaedlich@jm.rlp.de -Subject "Die Aufgabe ist Fertig" -To Sven.schaedlich@jm.rlp.de -Body "Hallo, der Auftrag wurde abgearbeitet." -SmtpServer outlook.jmrlp.de -UseSsl
+        Send-MailMessage -SmtpServer "smtp.yourserver.tld" -to "your@mail.address" -from "from@mail.address" -Subject "Die Aufgabe ist Fertig" -Body "Hallo, der Auftrag wurde abgearbeitet." -UseSsl
         $x = 1
     }
     else {

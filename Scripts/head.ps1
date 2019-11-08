@@ -1,20 +1,14 @@
 
-$SMTPServer = "outlook.jmrlp.de"
-<# $username = "min\helpdesk"
-$password = ConvertTo-SecureString "Eg1UHD" -AsPlainText -Force #>
-$From = "helpdesk@jm.rlp.de"
-$To = "sven.schaedlich@jm.rlp.de", "matthias.stubenvoll@jm.rlp.de", "fabio.clemenz@jm.rlp.de"
-$Subject = "Periodic report of snapshots"
-<# $Body = @"
-Im Anhang befindet sich der aktuelle Report.
-Nach überprüfung kann dieser Archiviert werden.
-"@ #>
-$Attachments = "\\5100S-MON1.justiz.jmrlp.de\SnapshotReport\SnapshotReport.html"
-$Vcenter = '5100S-VC1'
-$OutFile = '\\5100S-MON1.justiz.jmrlp.de\SnapshotReport\SnapshotReport.html'
+$SMTPServer = 'smtp.domain.tld'
+$From = 'from@mail.address'
+$To = 'to@mail.address'
+$Subject = 'Periodic report of snapshots'
+$Attachments = '\\path\for\SnapshotReport.html'
+$Vcenter = ''
+$OutFile = '\\path\for\SnapshotReport.html'
 $date = Get-Date
-$Pre = '<img src="\\5100S-MON1.justiz.jmrlp.de\SnapshotReport\logo_klein.png" alt="ISD-Logo" align=right ><h1>List of Snapshots at 5100S-VC1</h1>'
-$Post = "<h3>Created on " + "$date" + " by Sven Schaedlich</h3>"
+$Pre = '<img src="\\path\to\logo.png" alt="Logo" align=right ><h1>List of Snapshots</h1>'
+$Post = "<h3>Created on " + "$date" + " by Adinirakh</h3>"
 $head = @"
 <!DOCTYPE HTML PUBLIC ?-//W3C//DTD HTML 4.01 Frameset//EN? ?http://www.w3.org/TR/html4/frameset.dtd?&gt;
 <html><head><title>List of current Snapshots</title><meta http-equiv=?refresh? content=?120? />
@@ -96,17 +90,17 @@ table{ margin-left: 20px; }
 
 # Verbindung mit vCenter aufnehmen
 Write-Host 'PowerCLI laden'
-Add-PSSnapin vmware.vimautomation.core
+Import-Module vmware.PowerCLI
+#Add-PSSnapin vmware.vimautomation.core
 
-Write-Host 'mit vCenter verbinden'
+Write-Host 'Connecting to vCenter'
 Connect-VIServer $VCenter
 
 
-Write-Host 'Report erstellen'
+Write-Host 'Creating report'
 Get-VM | Get-Snapshot | Select-Object VM, Name, @{Label = "Size"; Expression = { "{0:N2} MB" -f ($_.SizeMB) } }, Created, IsCurrent | ConvertTo-Html -head $head -pre $Pre -Post $Post | Out-File $OutFile
 
-Write-Host 'Report als Mail verschicken'
-# $creds = New-Object System.Management.Automation.PSCredential ($username, $password)
+Write-Host 'Sending report as mail'
 
 $AttachmentsAsHTLM = Get-Content $Attachments | Out-String
 Send-MailMessage -To $To -From $From -Subject $Subject -Body $AttachmentsAsHTLM -BodyAsHtml -SmtpServer $SMTPServer -Encoding ([System.Text.Encoding]::UTF8)
