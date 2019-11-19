@@ -15,7 +15,7 @@ Das Skript fährt alle virtuellen Maschinen aus der Datei stopVMs.txt herunter, 
 der Maschinen und fährt diese dann in der Reihenfolge wie in der Datei startVMs.txt angegeben
 wieder hoch.
 
-### Get-SnapshotReport.ps1
+### Report-Snapshots.ps1
 
 Erstellt einen Bericht über alle Snapshots und verschickt diesen Bericht als E-Mail an definierte
 Benutzer.
