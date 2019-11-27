@@ -4,22 +4,26 @@ Eine Sammlung der Skripte die ich regelmäßig benutze. Sie sind nicht schön, a
 
 ## Skripte für die PowerCLi von VMWare
 
-### Get-VMwareTask.ps1
+### [Get-VMwareTask.ps1](./Scripts/Get-VMwareTask.ps1)
 
 Dieses Skript fragt einen Task im vCenter regelmäßig ab und schickt eine E-Mail wenn dieser Task
 beendet ist.
 
-### Create-Snapshots.ps1
+### [Create-Snapshots.ps1](./Scripts/Create-Snapshots.ps1)
 
 Das Skript fährt alle virtuellen Maschinen aus der Datei stopVMs.txt herunter, erstellt Snapshots
 der Maschinen und fährt diese dann in der Reihenfolge wie in der Datei startVMs.txt angegeben
 wieder hoch.
 
-### Report-Snapshots.ps1
+### [Report-Snapshots.ps1](./Scripts/Report-Snapshots.ps1)
 
 Erstellt einen Bericht über alle Snapshots und verschickt diesen Bericht als E-Mail an definierte
 Benutzer.
 
-### Install-PersonalEnviroment.ps1
+### [Install-PersonalEnviroment.ps1](./Scripts/Install-PersonalEnviroment.ps1)
 
 Das Skript installiert meine Standard Programme auf einem frischen Windows 10 Computer.
+
+## [Profile](./Scripts/Microsoft.PowerShell_profile.ps1)
+
+Mein Standardprofil für die PowerShell.
