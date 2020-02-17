@@ -21,7 +21,7 @@ choco install vscode -y
 
 #################### Working Tools ##################
 choco install powershell-core -y
-choco install fiddler -y
+# choco install fiddler -y
 choco install nmap -y
 choco install wireshark -y
 choco install git -y

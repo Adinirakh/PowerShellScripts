@@ -1,0 +1,20 @@
+<html>
+<style type="text/css" style="display:none">
+<!--
+P
+    {margin-top:0;
+    margin-bottom:0}
+-->
+</style>
+</head>
+<body>
+<p>
+Sehr geehrte Damen und Herren,<br>
+ich bin zur Zeit nicht im Haus. Ihre Nachrichten werden w&auml;hrend meiner Abwesenheit nicht gelesen oder weitergeleitet.<br>
+In dringenden F&auml;llen wenden Sie sich an meinen Vertreter.<br>
+<br>
+-----<br>
+Signatur einf&uuml;gen.
+</p>
+</body>
+</html>
