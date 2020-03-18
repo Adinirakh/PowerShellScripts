@@ -28,6 +28,10 @@ Das Skript installiert meine Standard Programme auf einem frischen Windows 10 Co
 
 Das interaktive Skript hilft IT-Verantwortlichen beim setzen des Abwesenheitsassistenten. Benötigt wird nur PowerShell Version 5+, ein Exchange-Server und eine .txt Datei mit der gewünschten Nachricht.
 
+### [doc2pdf.ps1](./Scripts/doc2pdf/doc2pdf.ps1)
+
+Das Skript konvertiert alle .doc und .docx Dateien in einem Verzeichnis in.pdf Dateien.
+
 ## [Profile](./Scripts/Profile/Microsoft.PowerShell_profile.ps1)
 
 Mein Standardprofil für die PowerShell.
