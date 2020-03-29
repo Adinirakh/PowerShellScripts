@@ -32,6 +32,10 @@ Das interaktive Skript hilft IT-Verantwortlichen beim setzen des Abwesenheitsass
 
 Das Skript konvertiert alle .doc und .docx Dateien in einem Verzeichnis in.pdf Dateien.
 
+### [Get-WifiPasswords.ps1](./Scripts/Get-WifiPasswords/Get-WifiPasswords.ps1)
+
+Das Skript listet alle gespeicherten WLAN-Netze mit den gespeicherten Passwörtern auf. Auf einem englischen System muss das Wort "Schlüsselinhalt" gegen "keyvalue" ausgetauscht werden.
+
 ## [Profile](./Scripts/Profile/Microsoft.PowerShell_profile.ps1)
 
 Mein Standardprofil für die PowerShell.
